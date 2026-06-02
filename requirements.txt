@@ -1,0 +1,39 @@
+# requirements.txt — ASL Detection System
+# Tested on Python 3.10+
+
+# ── Core ML / CV ──────────────────────────────────────────────────────────────
+ultralytics>=8.2.0          # YOLOv8 training, inference, and export
+torch>=2.1.0                # PyTorch (GPU build auto-selected by ultralytics)
+torchvision>=0.16.0
+
+# ── Computer Vision ───────────────────────────────────────────────────────────
+opencv-python>=4.9.0        # Webcam capture, image processing, drawing
+Pillow>=10.0.0              # Image I/O utilities
+
+# ── Data & Numerics ───────────────────────────────────────────────────────────
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# ── Visualisation ─────────────────────────────────────────────────────────────
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# ── ML Utilities ─────────────────────────────────────────────────────────────
+scikit-learn>=1.3.0         # Confusion matrix, metrics helpers
+
+# ── Annotation / Dataset ─────────────────────────────────────────────────────
+roboflow>=1.1.0             # Optional: Roboflow dataset download & annotation
+
+# ── System Monitoring ─────────────────────────────────────────────────────────
+psutil>=5.9.0               # CPU/RAM usage benchmarking
+
+# ── Experiment Tracking (optional) ────────────────────────────────────────────
+# wandb>=0.15.0             # Uncomment to enable Weights & Biases logging
+# tensorboard>=2.14.0       # Uncomment to enable TensorBoard logging
+
+# ── YAML ──────────────────────────────────────────────────────────────────────
+PyYAML>=6.0.0
+
+# ── Dev / Testing ─────────────────────────────────────────────────────────────
+tqdm>=4.66.0

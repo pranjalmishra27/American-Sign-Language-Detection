@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Model weights (large files — use Git LFS or share via cloud)
+models/*/weights/best.pt
+models/*/weights/last.pt
+*.pt
+*.onnx
+*.tflite
+*.engine
+*.task
+outputs/diagnostic_summary.json
+
+# Dataset images (large — distribute separately)
+dataset/images/raw/
+dataset/images/augmented/
+dataset/images/train/
+dataset/images/valid/
+dataset/images/test/
+
+# Keep label files and yaml config
+!dataset/labels/
+!dataset/data.yaml
+!dataset/DATASET_SUMMARY.md
+!dataset/ANNOTATION_SAMPLES.md
+
+# Outputs (generated during runs)
+outputs/evaluation/
+outputs/benchmark/
+outputs/robustness/
+outputs/inference_results/
+outputs/*.png
+outputs/*.jpg
+outputs/*.mp4
+
+# Wandb / MLflow
+wandb/
+mlruns/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Docker
+.dockerignore
+
+# Misc
+*.log
+*.tmp
+*.bak

@@ -1,0 +1,18 @@
+path: C:\Users\ASUS\Downloads\asl-detection\asl-detection
+train: dataset/images/train
+val: dataset/images/valid
+test: dataset/images/test
+nc: 12
+names:
+  0: A
+  1: B
+  2: C
+  3: D
+  4: E
+  5: F
+  6: G
+  7: H
+  8: I
+  9: J
+  10: K
+  11: L

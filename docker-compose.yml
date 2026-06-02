@@ -1,0 +1,98 @@
+# docker-compose.yml — ASL Detection System
+# ─────────────────────────────────────────────────────────────────────────────
+# Services:
+#   train    — train YOLOv8 model
+#   evaluate — run evaluation suite
+#   webcam   — live webcam demo (requires X11 / display forwarding)
+#
+# Usage:
+#   docker compose run --rm train
+#   docker compose run --rm evaluate
+#   docker compose run --rm webcam
+# ─────────────────────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+x-base: &base
+  build: .
+  env_file: .env
+  volumes:
+    - ./dataset:/app/dataset
+    - ./models:/app/models
+    - ./outputs:/app/outputs
+
+services:
+
+  # ── Training ────────────────────────────────────────────────────────────────
+  train:
+    <<: *base
+    container_name: asl_train
+    command: >
+      python src/train.py
+        --model yolov8n
+        --epochs 100
+        --batch_size 16
+    # Uncomment for GPU support:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  train-compare:
+    <<: *base
+    container_name: asl_train_compare
+    command: python src/train.py --compare --epochs 100
+
+  # ── Evaluation ──────────────────────────────────────────────────────────────
+  evaluate:
+    <<: *base
+    container_name: asl_evaluate
+    command: >
+      python src/evaluate.py
+        --weights models/asl_yolov8n/weights/best.pt
+        --data    dataset/data.yaml
+        --split   test
+        --output  outputs/evaluation
+
+  # ── Inference on test images ─────────────────────────────────────────────────
+  inference:
+    <<: *base
+    container_name: asl_inference
+    command: >
+      python src/inference.py
+        --source  dataset/images/test
+        --weights models/asl_yolov8n/weights/best.pt
+        --conf    0.5
+        --output  outputs/inference_results
+
+  # ── Live Webcam Demo (Linux + X11) ──────────────────────────────────────────
+  webcam:
+    <<: *base
+    container_name: asl_webcam
+    command: >
+      python src/webcam.py
+        --weights models/asl_yolov8n/weights/best.pt
+        --conf    0.5
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+    volumes:
+      - ./dataset:/app/dataset
+      - ./models:/app/models
+      - ./outputs:/app/outputs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+      - /dev/video0:/dev/video0   # webcam
+    network_mode: host
+
+  # ── Data Augmentation ────────────────────────────────────────────────────────
+  augment:
+    <<: *base
+    container_name: asl_augment
+    command: >
+      python src/augment.py
+        --input_dir        dataset/images/raw
+        --output_dir       dataset/images/augmented
+        --target_per_class 600
