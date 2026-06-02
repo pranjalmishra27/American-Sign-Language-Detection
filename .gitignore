@@ -49,13 +49,17 @@ dataset/images/test/
 !dataset/ANNOTATION_SAMPLES.md
 
 # Outputs (generated during runs)
-outputs/evaluation/
 outputs/benchmark/
 outputs/robustness/
 outputs/inference_results/
-outputs/*.png
-outputs/*.jpg
 outputs/*.mp4
+
+# Whitelist confusion matrices, curves, and evaluation reports
+!outputs/evaluation/
+!outputs/evaluation/*
+!models/asl_yolov8n/*.png
+!models/asl_yolov8n/*.jpg
+!models/asl_yolov8n/results.csv
 
 # Wandb / MLflow
 wandb/
