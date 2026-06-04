@@ -76,6 +76,31 @@ Photometric: brightness, contrast, colour jitter, Gaussian blur, motion blur, sh
 
 ---
 
+## Training Results
+
+| Metric | Value |
+|----------|----------|
+| Model Variant | YOLOv8n |
+| Epochs Trained | 50 |
+| Training Time | 21.7 min |
+| Device | CPU |
+| Best Weights | `models\asl_yolov8n\weights\best.pt` |
+| Last Weights | `models\asl_yolov8n\weights\last.pt` |
+| mAP@50 | **99.40%** |
+| mAP@50-95 | **99.15%** |
+| Precision | **98.66%** |
+| Recall | **98.32%** |
+
+### Performance Summary
+
+- ✅ **mAP@50:** 99.40%
+- ✅ **mAP@50-95:** 99.15%
+- ✅ **Precision:** 98.66%
+- ✅ **Recall:** 98.32%
+- ✅ Trained for **50 epochs** in **21.7 minutes**
+- ✅ Best model saved at: `models\asl_yolov8n\weights\best.pt`
+---
+
 ## Project Structure
 
 ```
